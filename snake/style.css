@@ -1,0 +1,23 @@
+.board {
+  height: 600;
+  width: 600;
+}
+
+.cell {
+  height: 20;
+  width: 20;
+  background: gray;
+  display: inline-block;
+  border-style: solid;
+  border-color: white;
+  border-width: 2;
+  box-sizing: border-box;
+}
+
+.snake {
+  background: red;
+}
+
+.apple {
+  background: green;
+}
