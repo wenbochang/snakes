@@ -8,15 +8,15 @@
   View.prototype.start = function(){
     this.board = new SnakeGame.Board();
     this.handleKeyEvent();
-    // this.step.bind(this)();
     this.TIMER = setInterval(this.step.bind(this), 250);
   }
 
   View.prototype.step = function(){
+    this.enableReset = true;
     this.board.snake.move();
-    this.board.eatApple();
-    if (this.board.hitWall()){
-      alert("You are dead.");
+    this.board.checkMove();
+    if (this.board.hitWall || this.board.hitSegment){
+      alert("You are dead.\nPress 'r' to restart.");
       clearInterval(this.TIMER);
     } else {
      this.render();
@@ -39,20 +39,35 @@
   }
 
   View.prototype.handleKeyEvent = function(event) {
-    var snake = this.board.snake
-    key('up', function(){
+    var view = this;
+    var snake = this.board.snake;
+    key('w', function(){
       snake.turn('N');
     });
-    key('down', function(){
+    key('s', function(){
       snake.turn('S');
     });
-    key('left', function(){
+    key('a', function(){
       snake.turn('W');
     });
-    key('right', function(){
+    key('d', function(){
       snake.turn('E');
     });
-  }
+    key('r', function(){
+      if (view.enableReset) {
+        view.resetGame();
+      }
+    });
+  };
+  
+  View.prototype.resetGame = function() {
+    clearInterval(this.TIMER);
+    this.enableReset = false;
+    this.board.snake = null;
+    this.board = new SnakeGame.Board();
+    this.TIMER = setInterval(this.step.bind(this), 200);
+    this.handleKeyEvent();
+  };
 
 })(this);
 

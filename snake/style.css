@@ -1,6 +1,6 @@
 .board {
-  height: 600;
-  width: 600;
+  height: 400;
+  width: 400;
 }
 
 .cell {
@@ -11,7 +11,7 @@
   border-style: solid;
   border-color: white;
   border-width: 2;
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .snake {
