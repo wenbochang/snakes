@@ -1,3 +1,4 @@
+//remove something from Array
 Array.prototype.remove = function(from, to) {
   var rest = this.slice((to || from) + 1 || this.length);
   this.length = from < 0 ? this.length + from : from;
@@ -8,7 +9,7 @@ Array.prototype.remove = function(from, to) {
   var SnakeGame = root.SnakeGame = ( root.SnakeGame || {} );
 
   var Board = SnakeGame.Board = function(){
-    this.snake = new SnakeGame.Snake([15,15]);
+    this.snake = new SnakeGame.Snake([5,5]);
     this.apples = [];
     this.grid = Board.makeGrid();
     this.hitWall = false;
@@ -97,7 +98,10 @@ Array.prototype.remove = function(from, to) {
   Board.prototype.addApple = function() {
     randX = Math.floor(Math.random() * Board.SIZE);
     randY = Math.floor(Math.random() * Board.SIZE);
-    this.apples.push([randX, randY]);
+
+    if (this.apples.length < 5 && this.getCellType(randX, randY) != "A") {
+      this.apples.push([randX, randY]);
+    }
   }
 
   Board.prototype.isSnake = function(rowIndex, colIndex){

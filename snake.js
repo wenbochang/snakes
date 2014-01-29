@@ -2,7 +2,7 @@
   var SnakeGame = root.SnakeGame = ( root.SnakeGame || {} );
 
   var Snake = SnakeGame.Snake = function(headPos) {
-    this.dir = 'N';
+    this.dir = 'S'; //initial direction
     this.segments = [headPos];
   }
 

@@ -5,18 +5,21 @@
     this.$el = $el;
   }
 
+  View.SPEED = 200;
+
   View.prototype.start = function(){
     this.board = new SnakeGame.Board();
     this.handleKeyEvent();
-    this.TIMER = setInterval(this.step.bind(this), 250);
+    this.TIMER = setInterval(this.step.bind(this), View.SPEED);
   }
 
   View.prototype.step = function(){
     this.enableReset = true;
     this.board.snake.move();
     this.board.checkMove();
+    this.board.addApple();
     if (this.board.hitWall || this.board.hitSegment){
-      alert("You are dead.\nPress 'r' to restart.");
+      alert("Uh oh!\nPress 'r' to restart.");
       clearInterval(this.TIMER);
     } else {
      this.render();
@@ -65,7 +68,7 @@
     this.enableReset = false;
     this.board.snake = null;
     this.board = new SnakeGame.Board();
-    this.TIMER = setInterval(this.step.bind(this), 200);
+    this.TIMER = setInterval(this.step.bind(this), View.SPEED);
     this.handleKeyEvent();
   };
 
